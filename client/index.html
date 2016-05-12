@@ -1,0 +1,116 @@
+<html ng-app="discussion_board">
+<head>
+  <title>Discussion Board</title>
+
+
+  <!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <!--stylesheet-->
+  <link rel="stylesheet" type="text/css" href="/css/mystyle.css">
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+  <script>
+
+  // PUT ANGULAR CODE HERE
+  var discussion_board = angular.module('discussion_board', ['ngRoute']);
+
+  //routes
+  discussion_board.config(function ($routeProvider){
+    $routeProvider
+      .when('/dashboard', {
+        templateUrl: '/views/dashboard.html'
+      })
+      .when('/', {
+          templateUrl: '/views/home.html'
+        })
+      .otherwise({
+        redirectTo: '/'
+      })
+  });
+
+  //homeController
+  discussion_board.controller('homeController', function($scope, usersFactory) {
+    $scope.users = [];
+
+    $scope.addUser = function(){
+      console.log($scope.new_user);
+      usersFactory.addUser($scope.new_user, function(users){
+        $scope.users = users;
+        $scope.new_user = {};
+      })
+    }
+  })
+
+
+  //dashboardController
+
+  //usersController
+  discussion_board.controller('usersController', function($scope, usersFactory) {
+  $scope.users = [];
+
+  // usersFactory.index(function(data){
+  //   $scope.users = data;
+  // })
+
+  $scope.adduser = function() {
+    usersFactory.adduser($scope.new_user, function(users){
+      $scope.users = users;
+      $scope.new_user = {};
+    });
+    
+  }
+})
+
+  //topicsController
+  discussion_board.controller('topicsController', function($scope, topicsFactory){
+      $scope.topics = [{name: "Science"}, {name: "Math"}, {name: "Programming"}, {name: "Harry Potter"}, {name: "Psychology"}, {name: "Other"}];
+
+      topicsFactory.index(function(data){
+        $scope.topics = data;
+      })
+
+      $scope.addtopic = function(){
+        topicsFactory.addtopic($scope.new_topic, function(topics){
+          $scope.topics = topics;
+          $scope.new_topic = {};
+        });
+      }
+  })
+
+  //usersFactory
+  discussion_board.factory('usersFactory', function($http){
+    var factory = {};
+    var users = [];
+
+    
+    factory.addUser = function(info, callback) {
+      $http.post('/users', info).success(function(output){
+        console.log(info);
+        users=ouput;
+        callback(users);
+      })
+    }
+
+    return factory;
+  })
+
+  //topicsFactory
+
+  </script>
+</head>
+<!-- everything in the body is going to use the friends controller (this gives us access to the friends controller $scope) -->
+<body>
+  <div ng-view="">
+        </div>
+</body>
+</html>

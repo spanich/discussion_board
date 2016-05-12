@@ -1,0 +1,34 @@
+<div ng-controller="dashboardController">
+	<h2>Welcome {{username}}!</h2>
+	<h5>Search:
+		<input type="text" ng-model="filter_q" placeholder="search">
+	</h5>
+	<table class="table">
+		<tr>
+			<th>Category</th>
+			<th>Topic</th>
+			<th>User Name</th>
+			<th>Posts</th>		
+		</tr>
+		<tr ng-repeat="user in users | filter: filter_q">
+			<td>{{Category}}</td>
+			<td>{{topic}}</td>
+			<td>{{User Name}}</td>
+			<td>{{Posts}}</td>
+		</tr>
+	</table>
+	<h3>Add a New Topic</h3>
+	<form>
+		<h4>Topic:
+			<input type="text" placeholder="topic" ng-model="">
+		</h4>
+		<h4>Description:
+			<textarea ng-model="" placeholder="description"></textarea>
+		</h4>
+		<h4>Category:
+			<select ng-model="">
+				<option ng-repeat="cat in category">cat.category</option
+			</select>
+		</h4>
+	</form>
+</div>
