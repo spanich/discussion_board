@@ -1,13 +1,22 @@
-// var userss = require('./../controllers/users.js');
-// var topics = require('./../controllers/topics.js');
+var users = require('./../controllers/users.js');
+var topics = require('./../controllers/topics.js');
 
 	module.exports = function(app) {
-		// app.get('/customers', function(req, res){
-		// 	customers.index(req, res);
-		// });
+		app.get('/', function(req, res){
+			users.index(req, res);
+		});
 		app.post('/users', function(req, res){
 			users.addUser(req, res);
 		});
+		app.get('/topics', function(req, res){
+			topics.index(req, res);
+		});
+		app.post('/topics', function(req, res){
+			topics.addTopic(req, res);
+		});
+		// app.post('/adduser', function(req, res){
+		// 	users.addUser(req, res);
+		// })
 		// app.get('/orders', function(req, res){
 		// 	// console.log(res.body);
 		// 	orders.index(req, res);

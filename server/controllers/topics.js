@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
+var Topic = mongoose.model('Topic');
 
 module.exports = function() {
 	return {
 		index: function(req, res) {
-			User.find({}, function(err, results){
+			Topic.find({}, function(err, results){
 				if (err){
 					console.log(err);
 				}
@@ -13,11 +13,11 @@ module.exports = function() {
 				}
 			})
 		},
-
-		addUser: function(req, res) {
-			var new_user = new User({name: req.body.name});
-			console.log(new_user);
-			new_user.save(new_user);
+		
+		addTopic: function(req, res) {
+			var new_topic = new Topic(req.body);
+			console.log(new_topic);
+			new_topic.save(new_topic);
 				res.json({message: 'success'})
 
 		},

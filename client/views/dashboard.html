@@ -1,5 +1,5 @@
 <div ng-controller="dashboardController">
-	<h2>Welcome {{username}}!</h2>
+	<h2>Welcome {{username}} !</h2>
 	<h5>Search:
 		<input type="text" ng-model="filter_q" placeholder="search">
 	</h5>
@@ -10,25 +10,30 @@
 			<th>User Name</th>
 			<th>Posts</th>		
 		</tr>
-		<tr ng-repeat="user in users | filter: filter_q">
+		<tr ng-repeat="topic in topics | filter: filter_q">
 			<td>{{Category}}</td>
-			<td>{{topic}}</td>
-			<td>{{User Name}}</td>
+			<td>{{name}}</td>
+			<td>{{Username}}</td>
 			<td>{{Posts}}</td>
 		</tr>
 	</table>
 	<h3>Add a New Topic</h3>
 	<form>
 		<h4>Topic:
-			<input type="text" placeholder="topic" ng-model="">
+			<input type="text" placeholder="topic" ng-model="new_topic.name">
 		</h4>
 		<h4>Description:
-			<textarea ng-model="" placeholder="description"></textarea>
+			<textarea placeholder="description" ng-model="new_topic.desc"></textarea>
 		</h4>
 		<h4>Category:
-			<select ng-model="">
-				<option ng-repeat="cat in category">cat.category</option
+			<select ng-model="new_topic.category">
+				<option>Psychology</option>
+				<option>Math</option>
+				<option>Science</option>
+				<option>History</option>
+				<option>Programming</option>
 			</select>
 		</h4>
+		<button type="button" class="btn btn-success btn-md" ng-click="addTopic()">Enter</button> 
 	</form>
 </div>

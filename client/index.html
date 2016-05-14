@@ -38,53 +38,60 @@
       })
   });
 
-  //homeController
-  discussion_board.controller('homeController', function($scope, usersFactory) {
+  //home/usersController
+  discussion_board.controller('usersController', function($scope, $location, usersFactory) {
     $scope.users = [];
 
+    // usersFactory.index(function(data){
+    //   $scope.users = data;
+    // })
+
     $scope.addUser = function(){
-      console.log($scope.new_user);
-      usersFactory.addUser($scope.new_user, function(users){
+      usersFactory.addUser($scope.user_info, function(users){
+        console.log($scope.user_info);
         $scope.users = users;
         $scope.new_user = {};
+
+        console.log("What is happening??");
+        $location.path('/dashboard');
       })
     }
   })
 
-
   //dashboardController
-
-  //usersController
-  discussion_board.controller('usersController', function($scope, usersFactory) {
-  $scope.users = [];
-
-  // usersFactory.index(function(data){
-  //   $scope.users = data;
-  // })
-
-  $scope.adduser = function() {
-    usersFactory.adduser($scope.new_user, function(users){
-      $scope.users = users;
-      $scope.new_user = {};
-    });
-    
-  }
-})
-
-  //topicsController
-  discussion_board.controller('topicsController', function($scope, topicsFactory){
-      $scope.topics = [{name: "Science"}, {name: "Math"}, {name: "Programming"}, {name: "Harry Potter"}, {name: "Psychology"}, {name: "Other"}];
+  discussion_board.controller('dashboardController', function($scope, usersFactory, topicsFactory){
+      $scope.topics = [];
+      $scope.users = [];
 
       topicsFactory.index(function(data){
         $scope.topics = data;
       })
 
+      usersFactory.index(function(data){
+        $scope.topics = data;
+      })
+
       $scope.addtopic = function(){
-        topicsFactory.addtopic($scope.new_topic, function(topics){
+        console.log("from controller)");
+        topicsFactory.addTopic($scope.new_topic, function(topics){
           $scope.topics = topics;
           $scope.new_topic = {};
         });
       }
+  })
+  
+
+  //topicsController
+  discussion_board.controller('topicsController', function($scope, topicsFactory){
+      $scope.topics = [];
+
+      topicsFactory.index(function(data){
+        $scope.topics = data;
+      })
+
+
+
+      
   })
 
   //usersFactory
@@ -92,19 +99,46 @@
     var factory = {};
     var users = [];
 
+    factory.index = function(callback) {
+      $http.get('/').success(function(output){
+        users = output;
+        callback(users);
+      });
+    }
     
     factory.addUser = function(info, callback) {
+      
       $http.post('/users', info).success(function(output){
-        console.log(info);
-        users=ouput;
-        callback(users);
-      })
+        // users=output;
+        callback();
+      });
+       
     }
+    
 
     return factory;
   })
 
   //topicsFactory
+  discussion_board.factory('topicsFactory', function($http){
+    var factory = {};
+    var users = [];
+
+    factory.index = function(callback) {
+      $http.get('/topics').success(function(output){
+        callback();
+      });
+    }
+
+    factory.addTopic = function(info, callback) {
+      console.log("from factory");
+      $http.post('/topics', info).success(function(output){
+        callback();
+      });
+    }
+
+    return factory;
+  })
 
   </script>
 </head>
