@@ -10,11 +10,11 @@
 			<th>User Name</th>
 			<th>Posts</th>		
 		</tr>
-		<tr ng-repeat="topic in topics | filter: filter_q">
-			<td>{{Category}}</td>
-			<td>{{name}}</td>
-			<td>{{Username}}</td>
-			<td>{{Posts}}</td>
+		<tr ng-repeat="topic in topics  | filter: filter_q">
+			<td>{{topic.category}}</td>
+			<td>{{topic.name}}</td>
+			<td>{{topic.username}}</td>
+			<td>{{topic.posts}}</td>
 		</tr>
 
 	</table>
@@ -35,6 +35,6 @@
 				<option>Programming</option>
 			</select>
 		</h4>
-		<button type="button" class="btn btn-success btn-md" ng-click="addTopic()">Enter</button> 
+		<button type="button" class="btn btn-success btn-md" ng-click="addtopic()">Enter</button> 
 	</form>
 </div>

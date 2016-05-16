@@ -52,7 +52,7 @@
         $scope.users = users;
         $scope.new_user = {};
 
-        console.log("What is happening??");
+        // console.log("What is happening??");
         $location.path('/dashboard');
       })
     }
@@ -72,7 +72,7 @@
       })
 
       $scope.addtopic = function(){
-        console.log("from controller)");
+        console.log("from controller");
         topicsFactory.addTopic($scope.new_topic, function(topics){
           $scope.topics = topics;
           $scope.new_topic = {};
