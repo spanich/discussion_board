@@ -3,8 +3,8 @@ var TopicSchema = new mongoose.Schema({
 	name: String,
 	desc: String,
 	category: String,
-	username: String,
-	posts: Number,
+	user: {type: Schema.Types.ObjectId, ref: 'User'},
+	posts: Number
 });
 
 mongoose.model('Topic', TopicSchema);
