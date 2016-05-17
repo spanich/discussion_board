@@ -17,8 +17,14 @@ module.exports = function() {
 		addTopic: function(req, res) {
 			var new_topic = new Topic(req.body);
 			console.log(new_topic);
-			new_topic.save(new_topic);
-				res.json({message: 'success'})
+			new_topic.save(function(err, results){
+				if(err){
+					console.log(err);
+				}
+				else{
+					res.json(results);
+				}
+			})
 
 		},
 	}

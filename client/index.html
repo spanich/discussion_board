@@ -72,10 +72,13 @@
       })
 
       $scope.addtopic = function(){
-        console.log("from controller");
+        console.log($scope.new_topic);
         topicsFactory.addTopic($scope.new_topic, function(topics){
-          $scope.topics = topics;
+          // $scope.topics = topics;
           $scope.new_topic = {};
+          topicsFactory.index(function(data){
+            $scope.topics = data;
+          })
         });
       }
   })
@@ -126,14 +129,15 @@
 
     factory.index = function(callback) {
       $http.get('/topics').success(function(output){
-        callback();
+        callback(output);
       });
     }
 
     factory.addTopic = function(info, callback) {
-      console.log("from factory");
+      // console.log("from factory");
       $http.post('/topics', info).success(function(output){
-        callback();
+        console.log(output);
+        callback(output);
       });
     }
 
