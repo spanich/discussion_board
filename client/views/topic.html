@@ -1,2 +1,18 @@
 <div ng-controller="topicsController">
+	<div id="topic">
+		<h4>{{name}} posted a topic</h4>
+		<h5>{{topic.name}}</h5>
+		<h5>{{topic.desc}}</h5>
+		<form>
+			<h4>Post your answer here: 
+				<textarea placeholder="Your answer..." ng-model="new_answer"></textarea>
+			</h4>
+			<button type="button" class="btn btn-success btn-md" ng-click="addanswer()">Enter</button> 
+		</form>
+	</div>
+	<div id="answers" ng-repeat="answer in answers">
+		<h6>{{user.name}}: {{user.answer}}</h6>
+		<button type="submit" class="btn btn-success btn-sm" ng-click="add_like()">Like</button>
+		<button type="submit" class="btn btn-danger btn-sm" ng-click="add_dislike()">Dislike</button>
+	</div>
 </div>

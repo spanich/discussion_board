@@ -17,8 +17,21 @@ module.exports = function() {
 		addUser: function(req, res) {
 			var new_user = new User({name: req.body.name});
 			console.log(new_user);
+			//find user
+			console.log(new_user);
 			new_user.save(new_user);
 				res.json({message: 'success'})
+
+			// User.findOne({name: req.body.name} function(err, results){
+			// 	console.log(results);
+			// 	if (err){
+			// 		new_user.save(new_user);
+			// 		 res.json({message: 'success'})
+			// 	}
+			// 	else{
+			// 		res.json(results);
+			// 	}
+			// })
 
 		},
 	}

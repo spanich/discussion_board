@@ -13,7 +13,7 @@
 		<tr ng-repeat="topic in topics  | filter: filter_q">
 			<td>{{topic.category}}</td>
 			<td>{{topic.name}}</td>
-			<td>{{user_info}}</td>
+			<td>{{topic._user.name}}</td>
 			<td>{{topic.posts}}</td>
 		</tr>
 

@@ -41,17 +41,18 @@
   //home/usersController
   discussion_board.controller('usersController', function($scope, $location, usersFactory) {
     $scope.users = [];
+    $scope.current_user = [];
 
     // usersFactory.index(function(data){
     //   $scope.users = data;
     // })
 
     $scope.addUser = function(){
+
       usersFactory.addUser($scope.user_info, function(users){
         console.log($scope.user_info);
         $scope.users = users;
         $scope.new_user = {};
-
         // console.log("What is happening??");
         $location.path('/dashboard');
       })
@@ -102,6 +103,7 @@
     var factory = {};
     var users = [];
 
+
     factory.index = function(callback) {
       $http.get('/').success(function(output){
         users = output;
@@ -110,7 +112,8 @@
     }
     
     factory.addUser = function(info, callback) {
-      
+      // users.push(user)
+      // console.log(user.name + " in factory")
       $http.post('/users', info).success(function(output){
         // users=output;
         callback();
