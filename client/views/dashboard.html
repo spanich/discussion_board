@@ -1,5 +1,5 @@
 <div ng-controller="dashboardController">
-	<h2>Welcome {{username}}!</h2>
+	<h2>Welcome {{curr_user[0].name}}!</h2>
 	<h5>Search:
 		<input type="text" ng-model="filter_q" placeholder="search">
 	</h5>
@@ -10,7 +10,7 @@
 			<th>User Name</th>
 			<th>Posts</th>		
 		</tr>
-		<tr ng-repeat="topic in topics  | filter: filter_q">
+		<tr ng-repeat="topic in topics  | filter: filter_q  | limitTo: 5">
 			<td>{{topic.category}}</td>
 			<td>{{topic.name}}</td>
 			<td>{{topic._user.name}}</td>

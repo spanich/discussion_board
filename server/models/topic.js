@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema =  mongoose.Schema
 // console.log("testing", Schema);
 
 var TopicSchema = new mongoose.Schema({

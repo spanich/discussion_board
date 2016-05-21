@@ -41,7 +41,7 @@
   //home/usersController
   discussion_board.controller('usersController', function($scope, $location, usersFactory) {
     $scope.users = [];
-    $scope.current_user = [];
+    $scope.curr_user = [];
 
     // usersFactory.index(function(data){
     //   $scope.users = data;
@@ -49,14 +49,23 @@
 
     $scope.addUser = function(){
 
-      usersFactory.addUser($scope.user_info, function(users){
+      usersFactory.addUser($scope.user_info, function(user){
         console.log($scope.user_info);
-        $scope.users = users;
+        // console.log(user, "printing users!!!");
         $scope.new_user = {};
-        // console.log("What is happening??");
+      usersFactory.saveCurrentUser($scope.user_info, function(){});
+        console.log($scope.user_info, "printing users!!!");
+        $scope.curr_user = $scope.user_info;
+        console.log($scope.curr_user);
         $location.path('/dashboard');
       })
+      // //test to try 
+      // usersFactory.showCurrentUser(function(data){
+      //     console.log("show curr controller", curr_user);
+      //     $scope.curr_user = data;
+      //   })
     }
+    
   })
 
   //dashboardController
@@ -72,6 +81,12 @@
         $scope.users = data;
       })
 
+      // usersFactory.showCurrentUser(function(data){
+      //     console.log("show curr controller", curr_user);
+      //     $scope.curr_user = data;
+      //   })
+
+
       $scope.addtopic = function(){
         console.log($scope.new_topic);
         topicsFactory.addTopic($scope.new_topic, function(topics){
@@ -81,6 +96,13 @@
             $scope.topics = data;
           })
         });
+      }
+
+      $scope.showcurrentuser = function(){
+        usersFactory.showCurrentUser(function(data){
+          console.log("show curr controller", curr_user);
+          $scope.curr_user = data;
+        })
       }
   })
   
@@ -102,6 +124,7 @@
   discussion_board.factory('usersFactory', function($http){
     var factory = {};
     var users = [];
+    var curr_user = [];
 
 
     factory.index = function(callback) {
@@ -116,9 +139,24 @@
       // console.log(user.name + " in factory")
       $http.post('/users', info).success(function(output){
         // users=output;
-        callback();
+        callback(output);
+        console.log("checking output", output);
       });
        
+    }
+    factory.saveCurrentUser = function(info, callback){
+      console.log("current user being passed", info);
+
+      // var curr_user = [];
+      curr_user.push(info);
+      console.log(curr_user);
+      callback(curr_user);
+
+    }
+
+    factory.showCurrentUser = function(callback){
+      console.log("factory_show_current", curr_user);
+      callback(curr_user);
     }
     
 
