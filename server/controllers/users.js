@@ -37,7 +37,7 @@ module.exports = function() {
 					})
 				}
 				else{
-					res.json(results);
+					res.json(result);
 				}
 			})
 

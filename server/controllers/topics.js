@@ -15,8 +15,9 @@ module.exports = function() {
 		},
 		
 		addTopic: function(req, res) {
+			// console.log(req.body, "Something unique");
 			var new_topic = new Topic(req.body);
-			console.log(new_topic);
+			console.log("topic passing!", new_topic);
 			new_topic.save(function(err, results){
 				if(err){
 					console.log(err);
@@ -26,6 +27,18 @@ module.exports = function() {
 				}
 			})
 
+		},
+
+		alltopics: function(req, res) {
+			topics.find({}, function(err, results){
+				console.log(results);
+				if(err){
+					console.log("error retrieving data");
+				}
+				else{
+					res.json(results);
+				}
+			})
 		},
 	}
 }();

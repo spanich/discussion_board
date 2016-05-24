@@ -4,10 +4,11 @@ var Schema =  mongoose.Schema
 
 var TopicSchema = new mongoose.Schema({
 	name: String,
+	username: String,
 	desc: String,
 	category: String,
-	_user: {type: Schema.Types.ObjectId, ref: 'User'},
-	posts: Number
+	// _user: {type: Schema.Types.ObjectId, ref: 'User'},
+	// posts: Number
 });
 
 mongoose.model('Topic', TopicSchema);

@@ -12,8 +12,11 @@ var topics = require('./../controllers/topics.js');
 			topics.index(req, res);
 		});
 		app.post('/topics', function(req, res){
-			// console.log("routes working");
+			console.log(req.body, "Routes testing here");
 			topics.addTopic(req, res);
+		});
+		app.get('/alltopics', function(req, res){
+			topics.alltopics(req, res);
 		});
 		// app.post('/adduser', function(req, res){
 		// 	users.addUser(req, res);
