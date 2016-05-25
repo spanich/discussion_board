@@ -30,8 +30,8 @@ module.exports = function() {
 		},
 
 		alltopics: function(req, res) {
-			topics.find({}, function(err, results){
-				console.log(results);
+			Topic.find({}, function(err, results){
+				console.log(results, "coming from BE controller");
 				if(err){
 					console.log("error retrieving data");
 				}

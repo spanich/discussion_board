@@ -87,7 +87,7 @@
         })
 
       topicsFactory.showalltopics(function(data){
-        console.log(data);
+        // console.log(data);
 
       })
 
@@ -191,7 +191,7 @@
 
     factory.showalltopics = function(callback){
       $http.get('/alltopics').success(function(output){
-        console.log("showalltopics", output);
+       // console.log("showalltopics", output); 
         callback(output);
       });
     }
